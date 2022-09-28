@@ -14,9 +14,10 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                dispatch({stype: 'SET_WORKOUTS', payload: json})
+                dispatch({type: 'SET_WORKOUTS', payload: json})
             }
         }
+        
         fetchWorkouts()
 }, [])
 

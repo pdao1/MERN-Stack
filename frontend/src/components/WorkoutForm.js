@@ -1,7 +1,13 @@
 import { useState } from 'react'
-import { create } from 'system-runtime/src/metamodel'
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
+
+const refreshPage = () => {
+  window.location.reload(false);
+}
+
 
 const WorkoutForm = () => {
+      const { dispatch } = useWorkoutsContext
       const [title, setTitle] = useState('')
       const [load, setLoad] = useState('')
       const [reps, setReps] = useState('')
@@ -30,6 +36,7 @@ const WorkoutForm = () => {
           setReps('')
           setError(null)
           console.log('new workout added', json) 
+          dispatch({type: 'CREATE_WORKOUT', payload: json})
         }
       }
       return  (
@@ -56,7 +63,7 @@ const WorkoutForm = () => {
           onChange={(e) => setReps(e.target.value)}
           value={reps}
         />
-        <button class="submit" onSubmit="refresh">Add Workout</button>
+        <button className="submit" onClick={refreshPage}>Add Workout</button>
         {error && <div className="error">{error}</div>}
         </form>
 
