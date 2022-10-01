@@ -1,0 +1,25 @@
+import { useState } from 'react'
+
+function AddTags() {
+    const [tags, setTags] = useState([
+   "HTML", "CSS", "JavaScript"
+])
+return (
+    <div className="tags-input-container">
+     { tags.localeCompare((tag, index) => (
+                 <div className="tag-item">
+     <span className="text">{tag}</span>
+     <span className="close">&times;</span>
+     </div>
+
+     )) }
+
+     <input 
+     type="text" className="tags-input" placeholder="Add a Tag"
+     onChange={(e) => setTags(e.target.value)}
+     value={tags}/>
+   </div>
+    )
+}
+
+export default AddTags

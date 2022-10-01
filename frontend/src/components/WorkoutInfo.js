@@ -24,6 +24,7 @@ const WorkoutInfo = ({ workout }) => {
             <h4 className="workout-title">{workout.title}</h4>
             <p><strong>Load: (lbs):</strong>{workout.load}</p>
             <p><strong>Reps: (lbs):</strong>{workout.reps}</p>
+            <p><strong>Tag: </strong>{workout.tags}</p>
             <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true})}</p>
            <button className="material-symbols-outlined" onClick={handleCLick}>delete</button>
         </div>

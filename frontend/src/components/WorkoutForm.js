@@ -11,12 +11,13 @@ const WorkoutForm = () => {
       const [title, setTitle] = useState('')
       const [load, setLoad] = useState('')
       const [reps, setReps] = useState('')
+      const [tags, setTags] = useState('')
       const [error, setError] = useState(null)
 
       const handleSubmit = async (e) => {
         e.preventDefault()
 
-      const workout = {title, load, reps}
+      const workout = {title, load, reps, tags}
 
       const response = await fetch('/api/workouts', {
           method: 'POST',
@@ -34,6 +35,8 @@ const WorkoutForm = () => {
           setTitle('')
           setLoad('')
           setReps('')
+          setTags('')
+          setImage('')
           setError(null)
           console.log('new workout added', json) 
           dispatch({type: 'CREATE_WORKOUT', payload: json})
@@ -42,7 +45,7 @@ const WorkoutForm = () => {
       return  (
         <form className="create" onSubmit={handleSubmit}>
           <h3>Add a New Workout</h3>
-
+      
           <label>Exercise Title</label>
           <input 
           type="text"
@@ -62,7 +65,40 @@ const WorkoutForm = () => {
           type="number"
           onChange={(e) => setReps(e.target.value)}
           value={reps}
-        />
+        /><br/>
+         <label>Tag</label><br/>
+         <select type="text"
+          onChange={(e) => setTags(e.target.value)}
+          value={tags}>
+          <option value="Push">Push</option>
+          <option value="Pull">Pull</option>
+          <option value="Legs">Legs</option>
+          <option value="Others">Others</option>
+        </select>
+          <br/>
+         {/* const AddTags() = 
+         [tags, setTags] => useState([
+   "HTML", "CSS", "JavaScript"
+])
+return (
+    <div className="tags-input-container">
+     { tags.localeCompare((tag, index) => (
+                 <div className="tag-item">
+     <span className="text">{tags}</span>
+     <span className="close">&times;</span>
+     </div>
+
+     )) }
+
+     <input 
+     type="text" className="tags-input" placeholder="Add a Tag"
+     onChange={(e) => setTags(e.target.value)}
+     value={tags}/>
+   </div>
+    )
+} */}
+
+        
         <button className="submit" onClick={refreshPage}>Add Workout</button>
         {error && <div className="error">{error}</div>}
         </form>
